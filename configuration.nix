@@ -15,11 +15,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -45,10 +40,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Disable the GNOME3/GDM auto-suspend feature that cannot be disabled in GUI!
   # If no user is logged in, the machine will power down after 20 minutes.
   
@@ -66,9 +57,9 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.travis-nuc-1 = {
+  users.users.nuc-prod = {
     isNormalUser = true;
-    description = "travis nuc";
+    description = "nuc server production";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       # vim
