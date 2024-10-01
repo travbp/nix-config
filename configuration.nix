@@ -14,10 +14,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-prod"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # disable power management to hopefully prevent sleeping
+  powerManagement.enable = false;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -37,29 +40,21 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Disable the GNOME3/GDM auto-suspend feature that cannot be disabled in GUI!
   # If no user is logged in, the machine will power down after 20 minutes.
   
-  systemd.targets = {
-    sleep.enable = false;
-    suspend.enable = false;
-    hibernate.enable = false;
-    hybrid-sleep.enable = false;
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
+  '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nuc-prod = {
+  users.users.travis = {
     isNormalUser = true;
-    description = "nuc server production";
+    description = "travis";
+    initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       # vim
@@ -72,6 +67,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     tailscale
     git
+    adguardhome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -85,7 +81,10 @@
   # List services that you want to enable:
   services = {
     tailscale.enable = true;
+    adguardhome.enable = true;
   };
+  
+  systemd.services.tailscaled.after=["NetworkManager-wait-online.service"];
 
   # create a oneshot job to authenticate to Tailscale
   systemd.services.tailscale-autoconnect = {
@@ -111,7 +110,7 @@
       fi
 
       # otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey tskey-auth-kexPTN1Am711CNTRL-dvCgZpx6smKwadQJdoZ3mKh6jg4YgKRnE
+      ${tailscale}/bin/tailscale up --ssh --auth-key=
     '';
   };
 
@@ -147,5 +146,11 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+  };
+
 
 }
