@@ -141,6 +141,11 @@
       parental_enabled = false;
       bind_hosts = [ "0.0.0.0" ];
     };
+    statistics = {
+      enabled = true;
+      interval = "8760h";
+    };
+    dhcp.enabled = false;
   };
 
   system.stateVersion = "24.05"; # Did you read the comment?
