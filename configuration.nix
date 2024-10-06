@@ -10,6 +10,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  system.stateVersion = "24.05";
+
   networking.hostName = "nixos-prod"; # Define your hostname.
   networking.domain = "travis-peter.com";
   networking.nameservers = [
@@ -18,7 +20,7 @@
   ];
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = false;
 
   # disable power management to hopefully prevent sleeping
   powerManagement.enable = false;
@@ -148,8 +150,6 @@
     };
     dhcp.enabled = false;
   };
-
-  system.stateVersion = "24.05"; # Did you read the comment?
 
   nix = {
     package = pkgs.nixFlakes;
