@@ -126,6 +126,18 @@
       };
   };
 
+  services.adguardhome.settings = {
+    auth_attempts = 3;
+    block_auth_min = 10;
+    http.address = "127.0.0.1:3000";
+
+    dns = {
+      protection_enabled = true;
+      parental_enabled = false;
+      bind_hosts = [ "0.0.0.0" ];
+    };
+  };
+
   system.stateVersion = "24.05"; # Did you read the comment?
 
   nix = {
