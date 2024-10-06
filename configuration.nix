@@ -116,7 +116,8 @@
     # adguard
     interfaces.tailscale0 = {
         allowedTCPPorts = [
-          3000 
+          3000
+          80
           853
         ];
         allowedUDPPorts = [
