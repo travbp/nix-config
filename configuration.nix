@@ -11,6 +11,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-prod"; # Define your hostname.
+  networking.domain = "travis-peter.com";
   networking.nameservers = [
     "9.9.9.9"
     "149.112.112.112"
