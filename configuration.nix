@@ -70,7 +70,7 @@
   # List services that you want to enable:
   services = {
     tailscale.enable = true;
-    adguardhome.enable = true;
+    adguardhome.enable = false;
   };
   
   systemd.services.tailscaled.after=["NetworkManager-wait-online.service"];
@@ -131,7 +131,7 @@
   services.adguardhome.settings = {
     auth_attempts = 3;
     block_auth_min = 10;
-    # http.address = "127.0.0.1:3000";
+    http.address = "127.0.0.1:3000";
 
     dns = {
       protection_enabled = true;
