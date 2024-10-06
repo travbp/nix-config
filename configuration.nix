@@ -118,6 +118,7 @@
         allowedTCPPorts = [
           3000
           80
+          53
           853
         ];
         allowedUDPPorts = [
