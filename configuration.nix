@@ -117,24 +117,32 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
 
     # adguard
-    interfaces.tailscale0 = {
-        allowedTCPPorts = [
-          3000
-          80
-          53
-          853
-        ];
-        allowedUDPPorts = [
-          53
-          853
-        ];
-      };
+    # interfaces.tailscale0 = {
+    #     allowedTCPPorts = [
+    #       3000
+    #       80
+    #       53
+    #       853
+    #     ];
+    #     allowedUDPPorts = [
+    #       53
+    #       853
+    #     ];
+    #   };
+
+    # adguard
+    allowedTCPPorts = [
+      853
+    ];
+    allowedUDPPorts = [
+      853
+    ];
   };
 
   services.adguardhome.settings = {
     auth_attempts = 3;
     block_auth_min = 10;
-    # http.address = "127.0.0.1:3000";
+    http.address = "127.0.0.1:3000";
 
     dns = {
       protection_enabled = true;
