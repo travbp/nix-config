@@ -121,11 +121,11 @@
         allowedTCPPorts = [
           3000
           80
-          # 53
+          53
           853
         ];
         allowedUDPPorts = [
-          # 53
+          53
           853
         ];
       };
