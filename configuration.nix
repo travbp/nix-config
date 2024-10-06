@@ -19,9 +19,6 @@
     "149.112.112.112"
   ];
 
-  # Enable networking
-  networking.networkmanager.enable = false;
-
   # disable power management to hopefully prevent sleeping
   powerManagement.enable = false;
 
