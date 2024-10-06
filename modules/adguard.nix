@@ -7,7 +7,7 @@
           853
         ];
         allowedUDPPorts = [
-          # 53
+          53
           853
         ];
       };
