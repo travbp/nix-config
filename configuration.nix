@@ -4,7 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ./modules/adguard.nix
+      # ./modules/adguard.nix
     ];
 
   # Bootloader.
@@ -121,5 +121,25 @@
     extraOptions = "experimental-features = nix-command flakes";
   };
 
+
+  #adguard
+  networking = {
+    firewall.interfaces.tailscale0 = {
+      allowedTCPPorts = [
+        3000 
+        853
+      ];
+      allowedUDPPorts = [
+        53
+        853
+      ];
+    };
+  };
+
+  services = {
+    adguardhome = {
+      enable = true;
+    };
+  };
 
 }
