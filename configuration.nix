@@ -114,29 +114,21 @@
     trustedInterfaces = [ "tailscale0" ];
   
     # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [
-      config.services.tailscale.port
-      853 # adguard
-    ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
 
     # adguard
-    # interfaces.tailscale0 = {
-    #     allowedTCPPorts = [
-    #       3000
-    #       80
-    #       53
-    #       853
-    #     ];
-    #     allowedUDPPorts = [
-    #       53
-    #       853
-    #     ];
-    #   };
-
-    # adguard
-    allowedTCPPorts = [
-      853
-    ];
+    interfaces.tailscale0 = {
+        allowedTCPPorts = [
+          3000
+          80
+          53
+          853
+        ];
+        allowedUDPPorts = [
+          53
+          853
+        ];
+      };
   };
 
   services.adguardhome.settings = {
