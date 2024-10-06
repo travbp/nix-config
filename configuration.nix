@@ -70,6 +70,7 @@
   # List services that you want to enable:
   services = {
     tailscale.enable = true;
+    adguardhome.enable = true;
   };
   
   systemd.services.tailscaled.after=["NetworkManager-wait-online.service"];
@@ -112,6 +113,17 @@
     # allow the Tailscale UDP port through the firewall
     allowedUDPPorts = [ config.services.tailscale.port ];
 
+    # adguard
+    interfaces.tailscale0 = {
+        allowedTCPPorts = [
+          3000 
+          853
+        ];
+        allowedUDPPorts = [
+          53
+          853
+        ];
+      };
   };
 
   system.stateVersion = "24.05"; # Did you read the comment?
@@ -119,27 +131,6 @@
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
-  };
-
-
-  #adguard
-  networking = {
-    firewall.interfaces.tailscale0 = {
-      allowedTCPPorts = [
-        3000 
-        853
-      ];
-      allowedUDPPorts = [
-        53
-        853
-      ];
-    };
-  };
-
-  services = {
-    adguardhome = {
-      enable = true;
-    };
   };
 
 }
