@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  # TODO please change the username & home directory to your own
   home.username = "travis";
   home.homeDirectory = "/home/travis";
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     vim
+    calibre
   ];
 
   # basic configuration of git, please change to your own
