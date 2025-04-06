@@ -6,6 +6,7 @@
       ./bootloader.nix
       ./network.nix
       ./persist.nix
+      ./users.nix
     ];
 
   # Set your time zone.
@@ -25,14 +26,6 @@
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
     };
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.travis = {
-    isNormalUser = true;
-    description = "travis";
-    initialPassword = "changeme";
-    extraGroups = [ "wheel" ];
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes" ];
