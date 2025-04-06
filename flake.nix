@@ -24,7 +24,8 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, ... } @ inputs:
+  {
     nixosConfigurations = {
       nixos-prod = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -38,7 +39,7 @@
 
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
