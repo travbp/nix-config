@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./network.nix
+      ./persist.nix
     ];
 
   # Set your time zone.
@@ -32,9 +33,9 @@
     isNormalUser = true;
     description = "travis";
     initialPassword = "changeme";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" ];
   };
-  
+
   nix.settings.experimental-features = ["nix-command" "flakes" ];
 
   system.stateVersion = "24.11";

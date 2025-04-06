@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+
+    # impermanence = {
+    #   url = "github:nix-community/impermanence";
+    # };
+
     # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -19,7 +24,12 @@
       nixos-prod = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          inputs.disko.nixosModules.default
+          (import ./disko.nix { device = "/dev/sda"; })
+
           ./nixos/configuration.nix
+
+          # inputs.impermanence.nixosModules.impermanence
 
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`

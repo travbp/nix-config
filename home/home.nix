@@ -7,23 +7,11 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     vim
-    # calibre
   ];
-
-  # basic configuration of git, please change to your own
-  programs.git = {
-    enable = true;
-    userName = "Travis Peter";
-    userEmail = "travbp@github.com";
-  };
 
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    # TODO add your custom bashrc here
-    # bashrcExtra = ''
-    #   export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    # '';
   };
 
   # This value determines the home Manager release that your
