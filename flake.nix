@@ -24,7 +24,7 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, disko, impermanence, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, disko, impermanence, ... }: {
     nixosConfigurations = {
       nixos-prod = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
