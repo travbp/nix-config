@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
+
+  imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
+  ];
+
   home.username = "travis";
   home.homeDirectory = "/home/travis";
 
@@ -13,6 +18,25 @@
     enable = true;
     enableCompletion = true;
   };
+
+  home.persistence."/persist/home" = {
+    directories = [
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Documents"
+      "Videos"
+      ".ssh"
+      ".nixops"
+      ".local/share/keyrings"
+      ".local/share/direnv"
+    ];
+    # files = [
+    #   ".screenrc"
+    # ];
+    allowOther = true;
+  };
+
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
