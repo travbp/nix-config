@@ -24,17 +24,17 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, disko, impermanence, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, impermanence, ... }: {
     nixosConfigurations = {
       nixos-prod = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          disko.nixosModules.default
+          inputs.disko.nixosModules.default
           (import ./disko.nix { device = "/dev/sda"; })
 
           ./nixos/configuration.nix
 
-          impermanence.nixosModules.impermanence
+          inputs.impermanence.nixosModules.impermanence
 
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
