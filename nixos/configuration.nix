@@ -3,7 +3,6 @@
 {
   imports =
     [
-      # ./hardware-configuration.nix
       ./bootloader.nix
       ./network.nix
       ./persist.nix
