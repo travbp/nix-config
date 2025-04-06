@@ -4,9 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    # impermanence = {
-    #   url = "github:nix-community/impermanence";
-    # };
+    impermanence = {
+      url = "github:nix-community/impermanence";
+    };
 
     # home-manager, used for managing user configuration
     home-manager = {
@@ -29,7 +29,7 @@
 
           ./nixos/configuration.nix
 
-          # inputs.impermanence.nixosModules.impermanence
+          inputs.impermanence.nixosModules.impermanence
 
           # make home-manager as a module of nixos
           # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
