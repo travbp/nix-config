@@ -24,15 +24,15 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, impermanence, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       nixos-prod = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ./nixos/configuration.nix
+
           inputs.disko.nixosModules.default
           (import ./disko.nix { device = "/dev/sda"; })
-
-          ./nixos/configuration.nix
 
           inputs.impermanence.nixosModules.impermanence
 
