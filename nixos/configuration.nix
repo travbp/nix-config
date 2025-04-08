@@ -7,6 +7,8 @@
       ./network.nix
       ./persist.nix
       ./users.nix
+      ./calibre-web-automated.nix
+      ./calibre-web-automated-book-downloader.nix
     ];
 
   # Set your time zone.
